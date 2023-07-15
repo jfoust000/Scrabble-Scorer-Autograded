@@ -70,7 +70,7 @@ function scrabbleScorer(word) {
    // Loop through each letter in the word.
    for (let i = 0; i < word.length; i++) {
    
-      // Check if the letter matches the corresponding newPointStructure key. If it does, add the points to the total points. And then add the letter points.
+      // Check if the letter matches the corresponding newPointStructure key. If it does, add the points to the total points. And then add the letter points. Spaces are 0 pts as defined in the transformation from oldPointStructure to newPointStructure.
       for (key in newPointStructure) {
          
          if (word[i] === key) {
@@ -102,7 +102,7 @@ function initialPrompt() {
 
    let word = input.question("\nEnter a word to score: ");
 
-   // Letters only, and can be multiple letters. Include a space between letters.
+   // RegEx - Letters only, and can be multiple letters. Includes a space.
    let letters = /^[A-Za-z ]+$/; 
 
    while (!word.match(letters)) {
@@ -123,8 +123,17 @@ function simpleScorer(word) {
    let letterPoints = 0;
 
    for (let i = 0; i < word.length; i++) {
+      
+      // If the character is a space, add 0 points to the total points. Otherwise, add 1 point.
+      if (word[i] === ' '){
+
+         letterPoints += 0;
+
+      } else {
 
       letterPoints += 1;
+
+      }
    }
 
    return letterPoints;
@@ -148,6 +157,10 @@ function vowelBonusScorer(word) {
       if (word[i].match(vowelsRegEx)) {   
 
          letterPoints += 3;
+        // If the character is a space, add 0 points to the total points. Otherwise, add  1 point.
+      } else if (word[i] === ' ') {
+
+         letterPoints += 0;
 
       } else {
 
