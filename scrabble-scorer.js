@@ -162,13 +162,13 @@ const scoringAlgorithms = [simpleScore, bonusVowels, scrabble];
 
 function scorerPrompt() {
 
-   let scoringSelection = input.question(`\n\nWhich scoring algorithm would you like to use? \n\nSimple Score = 0 (One point per character)\nBonus Vowels = 1 (Vowels = 3 pts, Consonants = 1 pt)\nScrabble = 2 (Uses Scrabble Point System)\n\nEnter a number from 0-2: `);
+   let scoringSelection = Number(input.question(`\n\nWhich scoring algorithm would you like to use? \n\nSimple Score = 0 (One point per character)\nBonus Vowels = 1 (Vowels = 3 pts, Consonants = 1 pt)\nScrabble = 2 (Uses Scrabble Point System)\n\nEnter a number from 0-2: `));
 
-   Number(scoringSelection);
-
-   while (!scoringSelection || scoringSelection < 0 || scoringSelection > scoringAlgorithms.length - 1 || scoringSelection > (Math.trunc(scoringSelection)) && scoringSelection < (Math.trunc(scoringSelection + 1))) {
+   while (Number.isNaN(scoringSelection) || scoringSelection < 0 || scoringSelection > scoringAlgorithms.length - 1 || scoringSelection > (Math.trunc(scoringSelection)) && scoringSelection < (Math.trunc(scoringSelection + 1))) {
 
       scoringSelection = Number(input.question(`\n\nWhich scoring algorithm would you like to use? \n\nSimple Score = 0\nBonus Vowels = 1\nScrabble = 2\n\nEnter a number from 0-2: `));
+
+      
 
    }
    
