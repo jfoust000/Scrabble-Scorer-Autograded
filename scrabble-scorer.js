@@ -10,7 +10,8 @@ const oldPointStructure = {
   4: ['F', 'H', 'V', 'W', 'Y'],
   5: ['K'],
   8: ['J', 'X'],
-  10: ['Q', 'Z']
+  10: ['Q', 'Z'],
+  0: [' ']
 };
 
 // Is deprecated and will be replaced by the function scrabbleScorer below.
@@ -101,7 +102,8 @@ function initialPrompt() {
 
    let word = input.question("\nEnter a word to score: ");
 
-   let letters = /^[A-Za-z]+$/; // Letters only, and can be multiple letters.
+   // Letters only, and can be multiple letters. Include a space between letters.
+   let letters = /^[A-Za-z ]+$/; 
 
    while (!word.match(letters)) {
 
