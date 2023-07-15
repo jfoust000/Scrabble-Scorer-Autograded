@@ -137,10 +137,13 @@ function vowelBonusScorer(word) {
    // letterPoints will hold the total points for the word.
    let letterPoints = 0;
 
+   // used to check for vowels.
+   let vowelsRegEx = /^[AEIOU]$/;
+
    for (let i = 0; i < word.length; i++) {
 
-      // Check for vowels and consonants. Vowels are 3 pts, Consonants are 1 pt.
-      if (word[i] === 'A' || word[i] === 'E' || word[i] === 'I' || word[i] === 'O' || word[i] === 'U') {
+      // Check for vowels (using regular expression) and consonants. Vowels are 3 pts, Consonants are 1 pt.
+      if (word[i].match(vowelsRegEx)) {   
 
          letterPoints += 3;
 
@@ -148,7 +151,6 @@ function vowelBonusScorer(word) {
 
          letterPoints += 1;
       }
-      
    }
    return letterPoints;
 }
