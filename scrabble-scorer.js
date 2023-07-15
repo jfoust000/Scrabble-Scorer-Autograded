@@ -12,26 +12,7 @@ const oldPointStructure = {
   10: ['Q', 'Z']
 };
 
-function transform(oldPointStructure) {
-
-   let newPointStructure = {};
-
-   for (key in oldPointStructure) {
-
-      for (let i = 0; i < oldPointStructure[key].length; i++) {
-
-         newPointStructure[oldPointStructure[key][i]] = key;
-
-      }
-   }
-
-   return newPointStructure;
-
-}
-
-let newPointStructure = transform(oldPointStructure);
-
-function scrabbleScorer(word) {
+function oldScrabbleScorer(word) {
 
 	word = word.toUpperCase();
 
@@ -49,6 +30,54 @@ function scrabbleScorer(word) {
 	}
 	return letterPoints;
  }
+
+function transform(oldPointStructure) {
+
+   let newPointStructure = {};
+
+   for (key in oldPointStructure) {
+
+      for (let i = 0; i < oldPointStructure[key].length; i++) {
+
+         newPointStructure[oldPointStructure[key][i]] = Number(key);
+
+      }
+   }
+
+   return newPointStructure;
+
+}
+
+let newPointStructure = transform(oldPointStructure);
+
+function scrabbleScorer(word) {
+
+	word = word.toUpperCase();
+
+	let letterPoints = "\n";
+   let points = 0;
+   
+   for (let i = 0; i < word.length; i++) {
+   
+      for (key in newPointStructure) {
+         
+         if (word[i] === key) {
+
+            points += newPointStructure[key];
+            letterPoints += `Points for '${word[i]}': ${newPointStructure[key]}\n`;
+
+         }
+      
+
+      }
+   }
+	
+   letterPoints += `\nTotal Points: ${points}\n`;
+	return letterPoints;
+
+ }
+
+ 
 
 // your job is to finish writing these functions and variables that we've named //
 // don't change the names or your program won't work as expected. //
@@ -133,14 +162,16 @@ const scoringAlgorithms = [simpleScore, bonusVowels, scrabble];
 
 function scorerPrompt() {
 
-   let scoringSelection = Number(input.question(`\n\nWhich scoring algorithm would you like to use? \n\nSimple Score = 0 (One point per character)\nBonus Vowels = 1 (Vowels = 3 pts, Consonants = 1 pt)\nScrabble = 2 (Uses Scrabble Point System)\n\nEnter a number from 0-2: `));
+   let scoringSelection = input.question(`\n\nWhich scoring algorithm would you like to use? \n\nSimple Score = 0 (One point per character)\nBonus Vowels = 1 (Vowels = 3 pts, Consonants = 1 pt)\nScrabble = 2 (Uses Scrabble Point System)\n\nEnter a number from 0-2: `);
 
-   while (scoringSelection < 0 || scoringSelection > scoringAlgorithms.length - 1 || scoringSelection > (Math.trunc(scoringSelection)) && scoringSelection < (Math.trunc(scoringSelection + 1)) || Number.isNaN(scoringSelection)) {
+   Number(scoringSelection);
+
+   while (!scoringSelection || scoringSelection < 0 || scoringSelection > scoringAlgorithms.length - 1 || scoringSelection > (Math.trunc(scoringSelection)) && scoringSelection < (Math.trunc(scoringSelection + 1))) {
 
       scoringSelection = Number(input.question(`\n\nWhich scoring algorithm would you like to use? \n\nSimple Score = 0\nBonus Vowels = 1\nScrabble = 2\n\nEnter a number from 0-2: `));
 
    }
-
+   
    return scoringSelection;
 } 
 
@@ -149,7 +180,20 @@ function runProgram() {
 
   let newWord = initialPrompt();
   let scoringAlgorithmSelection = scorerPrompt();
-  console.log(`\n\nScoring algorithm name: ${scoringAlgorithms[scoringAlgorithmSelection].name}\nscore for '${newWord}': ${scoringAlgorithms[scoringAlgorithmSelection].scoringFunction(newWord)}\n`);
+
+  if (scoringAlgorithmSelection === 2) {
+  
+   console.log(`\nScoring algorithm name: ${scoringAlgorithms[scoringAlgorithmSelection].name}\n\nscore for '${newWord}':\n${scoringAlgorithms[scoringAlgorithmSelection].scoringFunction(newWord)}\n`);
+
+   } else {
+
+      console.log(`\nScoring algorithm name: ${scoringAlgorithms[scoringAlgorithmSelection].name}\n\nscore for '${newWord}': ${scoringAlgorithms[scoringAlgorithmSelection].scoringFunction(newWord)}\n`);
+
+   }
+
+ 
+
+  
    
 }
 
@@ -159,6 +203,7 @@ module.exports = {
    initialPrompt: initialPrompt,
    transform: transform,
    oldPointStructure: oldPointStructure,
+   oldScrabbleScorer: oldScrabbleScorer,
    simpleScorer: simpleScorer,
    vowelBonusScorer: vowelBonusScorer,
    scrabbleScorer: scrabbleScorer,
