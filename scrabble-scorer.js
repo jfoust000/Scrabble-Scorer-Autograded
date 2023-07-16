@@ -131,7 +131,7 @@ function simpleScorer(word) {
 
       } else {
 
-      letterPoints += 1;
+         letterPoints += 1;
 
       }
    }
