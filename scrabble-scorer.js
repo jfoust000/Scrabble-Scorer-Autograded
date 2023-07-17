@@ -59,7 +59,7 @@ let newPointStructure = transform(oldPointStructure);
 // Replaces oldScrabbleScorer and uses the newPointStructure to score the word.
 function scrabbleScorer(word) {
 
-   // Make letters lowe case to check with case insensitivity.
+   // Make letters lower case to check with case insensitivity.
 	word = word.toLowerCase();
 
    // points is a number that will hold the total points for the word.
