@@ -170,7 +170,7 @@ let simpleScore = {
 
    name: "Simple Score",
    description: "Each letter is worth 1 point.",
-   scoringFunction: function (word) { return simpleScorer(word); }
+   scoringFunction: simpleScorer
 
 
 };
@@ -180,7 +180,7 @@ let bonusVowels = {
 
    name: "Bonus Vowels",
    description: "Vowels are 3 pts, consonants are 1 pt.",
-   scoringFunction: function(word) { return vowelBonusScorer(word); }
+   scoringFunction: vowelBonusScorer
 
 };
 
@@ -189,7 +189,7 @@ let scrabble = {
 
    name: "Scrabble",
    description: "The traditional scoring algorithm.",
-   scoringFunction: function(word) { return scrabbleScorer(word); }
+   scoringFunction: scrabbleScorer
 
 };
 
