@@ -59,8 +59,8 @@ let newPointStructure = transform(oldPointStructure);
 // Replaces oldScrabbleScorer and uses the newPointStructure to score the word.
 function scrabbleScorer(word) {
 
-   // Make letters upper case to check with case insensitivity.
-	word = word.toUpperCase();
+   // Make letters lowe case to check with case insensitivity.
+	word = word.toLowerCase();
 
    // points is a number that will hold the total points for the word.
    let points = 0;
@@ -68,10 +68,10 @@ function scrabbleScorer(word) {
    // Loop through each letter in the word.
    for (let i = 0; i < word.length; i++) {
    
-      // Check if the letter matches the corresponding newPointStructure key (to upper case because the keys are lower case). If it does, add the points to the total points. Spaces are 0 pts as defined in the transformation from oldPointStructure to newPointStructure.
+      // Check if the letter matches the corresponding newPointStructure key (to lower case because the keys are lower case). If it does, add the points to the total points. Spaces are 0 pts as defined in the transformation from oldPointStructure to newPointStructure.
       for (key in newPointStructure) {
          
-         if (word[i] === key.toUpperCase()) { 
+         if (word[i] === key) { 
 
             points += newPointStructure[key];
             
