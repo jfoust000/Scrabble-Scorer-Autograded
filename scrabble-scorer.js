@@ -170,7 +170,7 @@ let simpleScore = {
 
    name: "Simple Score",
    description: "Each letter is worth 1 point.",
-   scoringFunction: simpleScorer
+   scorerFunction: simpleScorer
 
 
 };
@@ -180,7 +180,7 @@ let bonusVowels = {
 
    name: "Bonus Vowels",
    description: "Vowels are 3 pts, consonants are 1 pt.",
-   scoringFunction: vowelBonusScorer
+   scorerFunction: vowelBonusScorer
 
 };
 
@@ -189,7 +189,7 @@ let scrabble = {
 
    name: "Scrabble",
    description: "The traditional scoring algorithm.",
-   scoringFunction: scrabbleScorer
+   scorerFunction: scrabbleScorer
 
 };
 
@@ -224,7 +224,7 @@ function runProgram() {
   let scoringAlgorithmSelection = scorerPrompt();
 
   // In the output, we call the corresponding scoring function in the scoringAlgorithms array with the word as a parameter (based on the users scoring algorithm they selected) using bracket notation.
-  console.log(`\nScoring algorithm name: ${scoringAlgorithms[scoringAlgorithmSelection].name}\n\nscore for '${newWord}': ${scoringAlgorithms[scoringAlgorithmSelection].scoringFunction(newWord)}\n`);
+  console.log(`\nScoring algorithm name: ${scoringAlgorithms[scoringAlgorithmSelection].name}\n\nscore for '${newWord}': ${scoringAlgorithms[scoringAlgorithmSelection].scorerFunction(newWord)}\n`);
 
 }
 
